@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:typed_data';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -31,7 +32,18 @@ class _LiveWebSocketStreamState extends State<LiveWebSocketStream> {
   }
 
   Future<void> _initCameraAndSocket() async {
-    final camera = cameras.first;
+
+
+    final camera = cameras.firstWhere(
+          (c) {
+        if (kIsWeb) {
+          return c.lensDirection == CameraLensDirection.front;
+        } else {
+          return c.lensDirection == CameraLensDirection.front;
+        }
+      },
+      orElse: () => cameras.first,
+    );
 
     _cameraController = CameraController(camera, ResolutionPreset.medium);
     await _cameraController.initialize();
