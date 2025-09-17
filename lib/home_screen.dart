@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import 'live_web_socket_stream.dart';
 import 'widgets/live_stream_page.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -72,7 +73,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) {
-          return LiveStreamPage();
+          return LiveWebSocketStream();
         },
       ),
     );
